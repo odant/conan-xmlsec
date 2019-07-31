@@ -1,0 +1,68 @@
+--- a/src/xsec/enc/WinCAPI/WinCAPICryptoProvider.cpp
++++ b/src/xsec/enc/WinCAPI/WinCAPICryptoProvider.cpp
+@@ -55,7 +55,7 @@
+                         LPCSTR provRSAName,
+                         DWORD dwFlags) {
+ 
+-    if (!CryptAcquireContext(&m_provDSS,
++    if (!CryptAcquireContextA(&m_provDSS,
+         NULL,
+         provDSSName,
+         PROV_DSS,
+@@ -65,7 +65,7 @@
+             "WinCAPICryptoProvider() - Error obtaining default PROV_DSS");
+     }
+ 
+-    if (!CryptAcquireContext(&m_provRSA,
++    if (!CryptAcquireContextA(&m_provRSA,
+         NULL,
+         provRSAName,
+         PROV_RSA_AES,
+@@ -80,7 +80,7 @@
+             m_haveAES = false;
+             m_provRSAType = PROV_RSA_FULL;
+ 
+-            if (!CryptAcquireContext(&m_provRSA,
++            if (!CryptAcquireContextA(&m_provRSA,
+                 NULL,
+                 provRSAName,
+                 PROV_RSA_FULL,
+@@ -107,20 +107,20 @@
+ 
+     // Now obtain our internal (library) key store
+ 
+-    if (!CryptAcquireContext(&m_provApacheKeyStore,
++    if (!CryptAcquireContextA(&m_provApacheKeyStore,
+         s_xsecKeyStoreName,
+         provRSAName,
+         m_provRSAType,
+         dwFlags))
+     {
+-        CryptAcquireContext(&m_provApacheKeyStore,
++        CryptAcquireContextA(&m_provApacheKeyStore,
+                                 s_xsecKeyStoreName,
+                                 provRSAName,
+                                 m_provRSAType,
+                                 CRYPT_DELETEKEYSET);
+ 
+         // Try to create
+-        if (!CryptAcquireContext(&m_provApacheKeyStore,
++        if (!CryptAcquireContextA(&m_provApacheKeyStore,
+             s_xsecKeyStoreName,
+             provRSAName,
+             m_provRSAType,
+--- a/src/xsec/enc/WinCAPI/WinCAPICryptoX509.cpp
++++ b/src/xsec/enc/WinCAPI/WinCAPICryptoX509.cpp
+@@ -133,10 +133,10 @@
+ 			"WinCAPI:X509 - getPublicKeyType called before X509 loaded");
+ 	}
+ 
+-	if (lstrcmp(mp_certContext->pCertInfo->SubjectPublicKeyInfo.Algorithm.pszObjId, CRYPTO_OID_DSA) == 0)
++	if (lstrcmpA(mp_certContext->pCertInfo->SubjectPublicKeyInfo.Algorithm.pszObjId, CRYPTO_OID_DSA) == 0)
+ 		return XSECCryptoKey::KEY_DSA_PUBLIC;
+ 
+-	if (lstrcmp(mp_certContext->pCertInfo->SubjectPublicKeyInfo.Algorithm.pszObjId, szOID_RSA_RSA) == 0)
++	if (lstrcmpA(mp_certContext->pCertInfo->SubjectPublicKeyInfo.Algorithm.pszObjId, szOID_RSA_RSA) == 0)
+ 		return XSECCryptoKey::KEY_RSA_PUBLIC;
+ 
+ 	return XSECCryptoKey::KEY_NONE;
