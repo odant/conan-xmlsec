@@ -51,7 +51,7 @@ class XmlsecConan(ConanFile):
             shutil.copy("XSECConfig.hpp", "src/xsec/framework/XSECConfig.hpp")
 
     def requirements(self):
-        self.requires("xerces-c/3.2.2+3@odant/testing")
+        self.requires("xerces-c/3.2.2+4@odant/testing")
         self.requires("openssl/1.1.0h@odant/stable")
 
     def build(self):
