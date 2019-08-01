@@ -3,6 +3,7 @@
 
 
 from conans import ConanFile, CMake, tools
+from conans.errors import ConanException
 import os, glob, shutil
 
 
@@ -37,7 +38,7 @@ class XmlsecConan(ConanFile):
             del self.options.dll_sign
 
     def build_requirements(self):
-        if self.options.ninja:
+        if get_safe(self.options, "ninja"):
             self.build_requires("ninja_installer/1.9.0@bincrafters/stable")
         if get_safe(self.options, "dll_sign"):
             self.build_requires("windows_signtool/[>=1.0]@%s/stable" % self.user)
@@ -54,11 +55,10 @@ class XmlsecConan(ConanFile):
         generator = "Ninja" if self.options.ninja == True else None
         cmake = CMake(self, build_type=build_type, generator=generator)
         cmake.verbose = False
-        #
         cmake.configure()
         cmake.build()
         cmake.install()
-    
+
     def package(self):
         self.copy("FindXmlsecC.cmake", src=".", dst=".")
         # Sign DLL
