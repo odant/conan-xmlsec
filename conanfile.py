@@ -15,7 +15,7 @@ def get_safe(options, name):
 
 class XmlsecConan(ConanFile):
     name = "xmlsec-c"
-    version = "2.0.2+0"
+    version = "2.0.2+1"
     license = "Apache License v2.0"
     description = "Xml-Security-C"
     url = "https://github.com/odant/conan-xmlsec-c"
