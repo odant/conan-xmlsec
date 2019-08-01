@@ -9,7 +9,7 @@ find_path(XmlsecC_INCLUDE_DIR
 )
 
 find_library(XmlsecC_LIBRARY
-    NAMES xmlsec_2_0x64d xmlsec_2_0x64 xmlsec_2_0d xmlsec_2_0
+    NAMES xmlsec_2_0_x64d xmlsec_2_0_x64 xmlsec_2_0d xmlsec_2_0
     PATHS ${CONAN_LIB_DIRS_XMLSEC-C}
     NO_DEFAULT_PATH
 )
