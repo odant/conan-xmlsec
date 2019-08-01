@@ -46,7 +46,7 @@ class XmlsecConan(ConanFile):
         tools.patch(patch_file="winapi.patch")
 
     def requirements(self):
-        self.requires("xerces-c/3.2.2+2@odant/testing")
+        self.requires("xerces-c/3.2.2+3@odant/testing")
         self.requires("openssl/1.1.0h@odant/stable")
 
     def build(self):
