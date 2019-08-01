@@ -615,6 +615,10 @@ else()
         ${SOURCES}
 		src/xsec/utils/unixutils/XSECSOAPRequestorSimpleUnix.cpp
     )
+    set(xmlsec_HEADERS
+        ${xmlsec_HEADERS}
+        xsec/framework/XSECConfig.hpp
+   ) 
 endif()
 
 set(RESOURCE)
