@@ -47,7 +47,7 @@ class XmlsecConan(ConanFile):
         if self.settings.os == "Windows":
             tools.patch(patch_file="winapi.patch")
         else:
-            shutil.copy("config.h", "src/config.h")
+            shutil.copy("config.h", "src/xsec/framework/config.h")
             shutil.copy("XSECConfig.hpp", "src/xsec/framework/XSECConfig.hpp")
 
     def requirements(self):

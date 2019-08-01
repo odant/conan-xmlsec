@@ -618,6 +618,7 @@ else()
     set(xmlsec_HEADERS
         ${xmlsec_HEADERS}
         xsec/framework/XSECConfig.hpp
+        xsec/framework/config.h
    ) 
 endif()
 
