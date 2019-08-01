@@ -26,7 +26,7 @@ class XmlsecConan(ConanFile):
     }
     default_options = "dll_sign=True", "ninja=True"
     generators = "cmake"
-    exports_sources = "src/*", "cmake/*", "FindXmlsecC.cmake", "CMakeLists.txt", "winapi.patch"
+    exports_sources = "src/*", "cmake/*", "FindXmlsecC.cmake", "CMakeLists.txt", "winapi.patch", "config.h", "XSECConfig.hpp"
     no_copy_source = True
     build_policy = "missing"
 
@@ -44,7 +44,11 @@ class XmlsecConan(ConanFile):
             self.build_requires("windows_signtool/[>=1.0]@%s/stable" % self.user)
 
     def source(self):
-        tools.patch(patch_file="winapi.patch")
+        if self.settings.os == "Windows":
+            tools.patch(patch_file="winapi.patch")
+        else:
+            shutil.copy("config.h", "src/config.h")
+            shutil.copy("XSECConfig.hpp", "src/xsec/framework/XSECConfig.hpp")
 
     def requirements(self):
         self.requires("xerces-c/3.2.2+3@odant/testing")
