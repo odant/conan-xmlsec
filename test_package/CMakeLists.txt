@@ -10,6 +10,9 @@ conan_basic_setup(TARGETS)
 
 enable_testing()
 
+add_definitions(
+    -DXSEC_BUILDING_TOOLS
+)
 
 # CONAN_PKG imported targets
 
