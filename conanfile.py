@@ -39,7 +39,7 @@ class XmlsecConan(ConanFile):
 
     def build_requirements(self):
         if get_safe(self.options, "ninja"):
-            self.build_requires("ninja_installer/1.9.0@bincrafters/stable")
+            self.build_requires("ninja/1.10.1")
         if get_safe(self.options, "dll_sign"):
             self.build_requires("windows_signtool/[>=1.0]@%s/stable" % self.user)
 
@@ -51,8 +51,8 @@ class XmlsecConan(ConanFile):
             shutil.copy("XSECConfig.hpp", "src/xsec/framework/XSECConfig.hpp")
 
     def requirements(self):
-        self.requires("xerces-c/3.2.2+4@odant/testing")
-        self.requires("openssl/1.1.0h@odant/stable")
+        self.requires("xerces-c/3.2.3+1@odant/stable")
+        self.requires("openssl/1.1.1h+0@odant/stable")
 
     def build(self):
         build_type = "Debug" if self.settings.build_type == "Debug" else "RelWithDebInfo"
